@@ -1,12 +1,29 @@
 package org.learning.java;
 
+import java.math.BigDecimal;
+import java.time.LocalTime;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class MainTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
+
+        // Creazione ogetto Concerto
+        String titoloConcerto = "Concerto prova";
+        LocalDate dataConcerto = LocalDate.of(2023, 9, 10);
+        int postiTot = 100;
+        LocalTime oraConcerto = LocalTime.of(18, 30);
+        BigDecimal prezzoConcerto = new BigDecimal("19.90");
+
+        Concerto concerto = new Concerto(titoloConcerto, dataConcerto, postiTot, oraConcerto, prezzoConcerto);
+
+        // Test metodi Concerto
+        System.out.println("Data ora concerto: " + concerto.getFormattedDataOra());
+        System.out.println("Prezzo concerto: " + concerto.getFormattedPrezzo());
+        System.out.println("Informazioni concerto: " + concerto.toString());
+
 
         // Chiedo d'inserire parametri evento
         System.out.println("Inserisci il titolo dell'evento: ");
