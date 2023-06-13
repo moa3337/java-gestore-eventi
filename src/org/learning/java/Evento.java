@@ -1,19 +1,19 @@
 package org.learning.java;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Evento {
     private String titolo;
-    private Date data;
+    private LocalDate data;
     private int postiTot;
     private int postiPrenot;
 
     // Costruttore
-    public Evento(String titolo, Date data, int postiTot) throws Exception {
+    public Evento(String titolo, LocalDate data, int postiTot) throws Exception {
         // Controllo che la data non sia già passata
-        Date currentDate = new Date();
-        if (data.before(currentDate)) {
+        LocalDate currentDate = LocalDate.now();
+        if (data.isBefore(currentDate)) {
             throw new Exception("La data dell'evento è già passata");
         }
 
@@ -37,13 +37,13 @@ public class Evento {
     }
 
     // Getter e setter data
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
-    public void setData(Date data) throws Exception {
+    public void setData(LocalDate data) throws Exception {
         // Controllo che la data non sia già passata
-        Date currentDate = new Date();
-        if (data.before(currentDate)) {
+        LocalDate currentDate = LocalDate.now();
+        if (data.isBefore(currentDate)) {
             throw new Exception("La data dell'evento è già passata");
         }
         this.data = data;
@@ -61,8 +61,8 @@ public class Evento {
     // Metodo prenota
     public void prenota() throws Exception {
         // Controllo che l'evento non si già passato
-        Date currentDate = new Date();
-        if (data.before(currentDate)) {
+        LocalDate currentDate = LocalDate.now();
+        if (data.isBefore(currentDate)) {
             throw new Exception("L'evento è già passato");
         }
 
@@ -76,8 +76,8 @@ public class Evento {
     // Metodo disdici
     public void disdici() throws Exception {
         // Controllo che l'evento non sia gà passato
-        Date currentDate = new Date();
-        if (data.before(currentDate)) {
+        LocalDate currentDate = LocalDate.now();
+        if (data.isBefore(currentDate)) {
             throw new Exception("l'evento è già passato");
         }
 
@@ -90,7 +90,7 @@ public class Evento {
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return sdf.format(data) + "-" + titolo;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return data.format(formatter) + "-" + titolo;
     }
 }
